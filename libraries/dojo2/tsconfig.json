@@ -1,12 +1,7 @@
 {
 	"version": "2.1.5",
 	"compilerOptions": {
-		"allowJS": true,
 		"declaration": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"jsx": "react",
-		"jsxFactory": "tsx",
 		"lib": [
 			"dom",
 			"es5",
@@ -30,10 +25,10 @@
 		"mocha",
 		"node"
 	],
+	"files": [
+		"tests.webpack.ts"
+	],
 	"include": [
-		"./src/**/*.ts",
-		"./src/**/*.tsx",
-		"./tests/**/*.ts",
-		"./typings/index.d.ts"
+		"./src/**/*.ts"
 	]
 }

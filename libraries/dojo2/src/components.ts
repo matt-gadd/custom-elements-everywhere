@@ -71,9 +71,9 @@ export class ComponentWithProperties extends WidgetBase {
 		const data = {
 			bool: true,
 			num: 42,
-			str: 'React',
-			arr: ['R', 'e', 'a', 'c', 't'],
-			obj: { org: 'facebook', repo: 'react' }
+			str: 'Dojo2',
+			arr: ['d', 'o', 'j', 'o', '2'],
+			obj: { org: 'dojo', repo: 'dojo2' }
 		};
 		return v('ce-with-properties', data);
 	}
@@ -84,9 +84,9 @@ export class ComponentWithUnregistered extends WidgetBase {
 		const data = {
 			bool: true,
 			num: 42,
-			str: 'React',
-			arr: ['R', 'e', 'a', 'c', 't'],
-			obj: { org: 'facebook', repo: 'react' }
+			str: 'Dojo2',
+			arr: ['d', 'o', 'j', 'o', '2'],
+			obj: { org: 'dojo', repo: 'dojo2' }
 		};
 		return v('div', [
 			v('ce-unregistered', data)
@@ -95,52 +95,47 @@ export class ComponentWithUnregistered extends WidgetBase {
 }
 
 export class ComponentWithImperativeEvent extends WidgetBase {
-	private _eventHandled = false
+	public eventHandled = false
 	_handleEvent(e: any) {
-		this._eventHandled = true;
+		this.eventHandled = true;
 		this.invalidate();
 	}
 	render() {
 		return v('div', [
-			v('div', [ this._eventHandled.toString() ]),
-			v('ce-with-event', { id: 'wc', onCamelEvent: this._handleEvent })
+			v('ce-with-event', { id: 'wc', oncamelEvent: this._handleEvent })
 		]);
 	}
 }
 
 export class ComponentWithDeclarativeEvent extends WidgetBase {
-	private _lowerCaseHandled = false;
-	private _kebabHandled = false;
-	private _camelHandled = false;
-	private _capsHandled = false;
-	private _pascalHandled = false;
+	public lowerCaseHandled = false;
+	public kebabHandled = false;
+	public camelHandled = false;
+	public capsHandled = false;
+	public pascalHandled = false;
 	handleLowercaseEvent(e: any) {
-		this._lowerCaseHandled = true;
+		this.lowerCaseHandled = true;
 	}
 	handleKebabEvent(e: any) {
-		this._kebabHandled = true;
+		this.kebabHandled = true;
 	}
 	handleCamelEvent(e: any) {
-		this._camelHandled = true;
+		this.camelHandled = true;
 	}
 	handleCapsEvent(e: any) {
-		this._capsHandled = true;
+		this.capsHandled = true;
 	}
 	handlePascalEvent(e: any) {
-		this._pascalHandled = true;
+		this.pascalHandled = true;
 	}
 	render() {
 		return v('div', [
-			v('div', [ this._lowerCaseHandled.toString() ]),
-			v('div', [ this._kebabHandled.toString() ]),
-			v('div', [ this._capsHandled.toString() ]),
-			v('div', [ this._pascalHandled.toString() ]),
 			v('ce-with-event', {
 				id: 'wc',
 				onlowercaseevent: this.handleLowercaseEvent,
 				'onkebab-event': this.handleKebabEvent,
 				oncamelEvent: this.handleCamelEvent,
-				onCAPSEvent: this.handleCapsEvent,
+				onCAPSevent: this.handleCapsEvent,
 				onPascalEvent: this.handlePascalEvent
 			})
 		]);

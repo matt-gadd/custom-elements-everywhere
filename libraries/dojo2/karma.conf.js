@@ -35,15 +35,18 @@ module.exports = function(config) {
     files: [
       { pattern: path.resolve(__dirname, './node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js'), watched: false },
       { pattern: path.resolve(__dirname, './node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js'), watched: false },
-      'tests.webpack.js' // just load this file
+      'tests.webpack.ts' // just load this file
     ],
     preprocessors: {
-      'tests.webpack.js': ['webpack', 'sourcemap'] // preprocess with webpack and our sourcemap loader
+      'tests.webpack.ts': ['webpack', 'sourcemap'] // preprocess with webpack and our sourcemap loader
+    },
+    mime: {
+      'text/x-typescript': ['ts']
     },
     reporters: ['dots', 'custom-html', 'json-result'], // report results in these formats
     htmlReporter: {
       outputFile: path.resolve(__dirname, './results/results.html'),
-      pageTitle: 'React + Custom Elements',
+      pageTitle: 'Dojo 2 + Custom Elements',
       groupSuites: true,
       useCompactStyle: true
     },
@@ -52,16 +55,23 @@ module.exports = function(config) {
     },
     webpack: { // kind of a copy of your webpack config
       // devtool: 'inline-source-map', // just do inline source maps instead of the default
-      resolve: {
-        modules: [
-          path.resolve(__dirname, '../__shared__/webcomponents/src'),
-          path.resolve(__dirname, './node_modules')
-        ]
-      },
+	  resolve: {
+        extensions: ['.js', '.ts'],
+		modules: [
+		  path.resolve(__dirname, '../__shared__/webcomponents/src'),
+		  path.resolve(__dirname, './node_modules')
+		]
+	  },
       module: {
         rules: [
 			{
-				test: /src[\\\/].*\.ts(x)?$/, use: [
+				test: /\.js$/,
+				loaders: ['babel-loader'],
+				exclude: /node_modules/
+			},
+			{ test: /\.js?$/, loader: 'umd-compat-loader' },
+			{
+				test: /.*\.ts(x)?$/, use: [
 					'umd-compat-loader',
 					{
 						loader: 'ts-loader',

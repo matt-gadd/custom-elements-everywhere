@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "build": "npm run test; DIST=../../docs/libraries/dojo2 && mkdir -p $DIST && cp -r ./meta $DIST/meta && cp -r ./results $DIST/results"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.41",
@@ -19,8 +20,15 @@
     "webpack": "^2.0.0"
   },
   "dependencies": {
-    "@dojo/widget-core": "^2.0.0-beta1.6",
-    "@webcomponents/webcomponentsjs": "^1.0.1",
+    "@dojo/core": "next",
+    "@dojo/has": "next",
+    "@dojo/interfaces": "next",
+    "@dojo/shim": "next",
+    "@dojo/widget-core": "next",
+    "@types/expect": "^1.20.2",
+    "@webcomponents/webcomponentsjs": "1.0.7",
+    "ts-loader": "^2.3.3",
+    "typescript": "^2.4.2",
     "xmlbuilder": "^9.0.4"
   }
 }
